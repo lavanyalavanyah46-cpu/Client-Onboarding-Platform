@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Client Onboarding Platform</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="layout">
+<aside class="sidebar">
+<h2>🤝 Client Onboarding</h2><p>Digital KYC & Policy Platform</p>
+<nav>
+<a class="active" href="#" onclick="showPage('dashboard',this)">Dashboard</a>
+<a href="#" onclick="showPage('profile',this)">Client Profile</a>
+<a href="#" onclick="showPage('kyc',this)">KYC Verification</a>
+<a href="#" onclick="showPage('documents',this)">Documents</a>
+<a href="#" onclick="showPage('policies',this)">Policy Selection</a>
+<a href="#" onclick="showPage('status',this)">Onboarding Status</a>
+</nav>
+</aside>
+<main>
+<header><div><h1 id="title">Dashboard</h1><p>Client onboarding management</p></div><button class="primary" onclick="showPage('profile')">+ New Client</button></header>
+
+<section id="dashboard" class="page">
+<div class="cards">
+<div class="card"><span>Total Clients</span><b>128</b><small>Active onboarding</small></div>
+<div class="card"><span>KYC Verified</span><b>94</b><small>73% verified</small></div>
+<div class="card"><span>Documents Pending</span><b>18</b><small>Needs submission</small></div>
+<div class="card"><span>Policies Selected</span><b>76</b><small>This month</small></div>
+</div>
+<div class="panel"><h3>Onboarding Progress</h3>
+<div class="progress"><div style="width:73%"></div></div><p>73% of registered clients have completed KYC verification.</p></div>
+<div class="panel"><h3>Recent Clients</h3><table><thead><tr><th>Client ID</th><th>Name</th><th>KYC</th><th>Policy</th><th>Status</th></tr></thead><tbody id="clientTable"></tbody></table></div>
+</section>
+
+<section id="profile" class="page hidden"><div class="panel"><h3>Client Profile</h3>
+<form onsubmit="saveClient(event)">
+<div class="formgrid"><label>Full Name<input id="name" required placeholder="Enter full name"></label>
+<label>Email<input id="email" type="email" required placeholder="name@example.com"></label>
+<label>Phone<input id="phone" required placeholder="+91 9876543210"></label>
+<label>Date of Birth<input id="dob" type="date" required></label>
+<label>Address<textarea id="address" required placeholder="Enter address"></textarea></label>
+<label>City<input id="city" required placeholder="City"></label></div>
+<button class="primary" type="submit">Save Client</button><p id="profileMsg"></p>
+</form></div></section>
+
+<section id="kyc" class="page hidden"><div class="panel"><h3>KYC Verification</h3><p>Enter identification details for verification.</p>
+<div class="formgrid"><label>Document Type<select id="doctype"><option>Aadhaar</option><option>PAN</option><option>Passport</option><option>Driving Licence</option></select></label>
+<label>Document Number<input id="docnum" placeholder="Enter document number"></label></div>
+<button class="primary" onclick="verifyKyc()">Verify KYC</button><div id="kycMsg"></div></div></section>
+
+<section id="documents" class="page hidden"><div class="panel"><h3>Document Submission</h3><p>Upload supporting documents.</p>
+<input type="file" multiple onchange="showFiles(this)"><ul id="files"></ul><button class="primary" onclick="submitDocs()">Submit Documents</button><p id="docMsg"></p></div></section>
+
+<section id="policies" class="page hidden"><div class="panel"><h3>Select Insurance Policy</h3>
+<div class="policygrid">
+<div class="policy"><h4>Health Secure</h4><p>Health insurance coverage with flexible benefits.</p><b>₹8,999 / year</b><button onclick="selectPolicy('Health Secure')">Select</button></div>
+<div class="policy"><h4>Life Protect</h4><p>Life protection plan for long-term financial security.</p><b>₹12,499 / year</b><button onclick="selectPolicy('Life Protect')">Select</button></div>
+<div class="policy"><h4>Family Care</h4><p>Family-focused insurance coverage.</p><b>₹15,999 / year</b><button onclick="selectPolicy('Family Care')">Select</button></div>
+</div><p id="policyMsg"></p></div></section>
+
+<section id="status" class="page hidden"><div class="panel"><h3>Onboarding Status</h3>
+<div class="steps"><div class="done">1<br><b>Profile</b></div><div class="done">2<br><b>KYC</b></div><div class="current">3<br><b>Documents</b></div><div>4<br><b>Policy</b></div><div>5<br><b>Completed</b></div></div>
+<div class="statusbox"><b>Current Status: Documents Pending</b><p>Complete document submission and policy selection to finish onboarding.</p></div></div></section>
+</main></div>
+<script src="script.js"></script>
+</body></html>
